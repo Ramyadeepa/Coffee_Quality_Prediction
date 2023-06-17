@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>K-Fold Cross Validation Result</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body style="background-color:rgb(192,163,146);">
+    <div class="container">
+        <h1>K-Fold Cross Validation Result</h1>
+        <p>Score: {{ accuracy }}</p>
+        <form action="/compare_models" method="GET">
+            <input type="submit" name="Compare Models" value="Compare Models" class="btn btn-primary" style="background-color:black;">
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

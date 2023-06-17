@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Percentage Split</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body style="background-color:rgb(192,163,146);">
+    <div class="container">
+        <h1>Percentage Split</h1>
+        <form method="POST" action="/train_model" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="train_size">Train Size (%):</label>
+                <input type="number" id="train_size" name="train_size" min="0" max="100" step="1" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="test_size">Test Size (%):</label>
+                <input type="number" id="test_size" name="test_size" min="0" max="100" step="1" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="model">Models:</label>
+                <select name="model" class="form-control">
+                    <option disabled selected value> -- select a Model -- </option>
+                    <option value="Random Forest">Random Forest</option>
+                    <option value="SVM">SVM</option>
+                    <option value="KNN">KNN</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="model_file">Select Pre-Trained Model:</label>
+                <input type="file" name="model_file" class="form-control-file">
+            </div>
+            <input type="hidden" name="test_option" value="percentage_split">
+            <input type="submit" value="Submit" class="btn btn-primary" style="background-color:black;">
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

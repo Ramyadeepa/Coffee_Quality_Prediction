@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Dataset</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<style>
+    h1 {
+        text-align: center;
+    }
+</style>
+<body style="background-color:rgb(192,163,146);">
+    <h1>Coffee Quality Prediction</h1>
+    <div class="container">
+        <h2>Upload Dataset</h2>
+        <form method="POST" action="/" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" name="dataset" accept=".csv" required class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color:black;">Upload</button>
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

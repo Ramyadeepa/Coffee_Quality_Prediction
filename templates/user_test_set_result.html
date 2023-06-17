@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Total Cup Point Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body style="background-color:rgb(192,163,146);">
+    <div class="container">
+        <h1>Total Cup Point Prediction</h1>
+        <p>Total Cup Point: {{ total_cup_point_pred }}</p>
+
+        <form action="/compare_models" method="GET">
+            <input type="submit" name="Compare Models" value="Compare Models" class="btn btn-primary" style="background-color:black;">
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

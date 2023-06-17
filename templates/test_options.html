@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Test Option</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body style="background-color:rgb(192,163,146);">
+    <div class="container">
+        <h1>Select Test Option</h1>
+        <form method="POST" action="/test_options">
+            <div class="form-group">
+                <label for="test_option">Test Option:</label>
+                <select name="test_option" required class="form-control">
+                    <option value="percentage_split">Percentage Split</option>
+                    <option value="k_fold_cross_validation">K-fold Cross Validation</option>
+                    <option value="user_test_set">User Test Set</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color:black;">Submit</button>
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

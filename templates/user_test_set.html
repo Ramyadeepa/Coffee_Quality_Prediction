@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Test Set</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body style="background-color:rgb(192,163,146);">
+    <div class="container">
+        <h1>User Test Set</h1>
+        <form method="POST" action="/train_model" enctype="multipart/form-data">
+            <input type="hidden" name="test_option" value="user_test_set">
+            <div class="form-group">
+                <label for="model">Models:</label>
+                <select name="model" class="form-control">
+                    <option disabled selected value> -- select a Model -- </option>
+                    <option value="Random Forest">Random Forest</option>
+                    <option value="SVM">SVM</option>
+                    <option value="KNN">KNN</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="model_file">Select Pre-Trained Model:</label>
+                <input type="file" name="model_file" class="form-control-file">
+            </div>
+            <div class="form-group">
+                <label for="aroma">Aroma:</label>
+                <input type="number" name="aroma" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="flavor">Flavor:</label>
+                <input type="number" name="flavor" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="aftertaste">Aftertaste:</label>
+                <input type="number" name="aftertaste" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="acidity">Acidity:</label>
+                <input type="number" name="acidity" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="body">Body:</label>
+                <input type="number" name="body" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="balance">Balance:</label>
+                <input type="number" name="balance" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="uniformity">Uniformity:</label>
+                <input type="number" name="uniformity" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="clean_cup">Clean Cup:</label>
+                <input type="number" name="clean_cup" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="sweetness">Sweetness:</label>
+                <input type="number" name="sweetness" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color:black;">Predict</button >
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Accuracy and Compare Models</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body style="background-color:rgb(192,163,146);">
+    <div class="container">
+        <h1>Predict Accuracy and Compare Models</h1>
+        <form method="POST" action="/accuracy_comparison" enctype="multipart/form-data">
+            <h2>Select Models to Compare</h2>
+            <label for="model_files">Select Pre-Trained Models:</label>
+            <input type="file" name="model_files" multiple accept=".pkl">
+            <button type="submit" class = "button">Compare</button>
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

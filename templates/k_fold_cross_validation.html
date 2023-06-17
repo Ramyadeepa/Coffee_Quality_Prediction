@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>K-fold Cross Validation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body style="background-color:rgb(192,163,146);">
+    <div class="container">
+        <h1>K-fold Cross Validation</h1>
+        <form method="POST" action="/train_model">
+            <input type="hidden" name="test_option" value="k_fold_cross_validation">
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <select name="model" required class="form-control">
+                    <option value="Random Forest">Random Forest</option>
+                    <option value="SVM">SVM</option>
+                    <option value="KNN">KNN</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="k_fold">K-fold Value:</label>
+                <input type="number" name="k_fold" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color:black;">Submit</button>
+        </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
