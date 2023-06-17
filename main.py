@@ -41,24 +41,18 @@ def test_options():
 
 @app.route('/train_model', methods=['POST'])
 def train_model():
-    #test_option = request.form['test_option']
     
     if test_option == 'percentage_split':
         train_size = int(request.form['train_size'])
         test_size = int(request.form['test_size'])
-        
-        # Load and preprocess the dataset
         dataset_path = os.path.join(app.config['DATASET_FOLDER'], 'Coffee.csv')
         df = pd.read_csv(dataset_path)
         df = df.drop(['Overall', 'Defects', 'Category One Defects', 'Category Two Defects'], axis=1)
         
         X = df.drop('Total Cup Points', axis=1)
         y = df['Total Cup Points']
-        
-        # Perform percentage split
         X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=train_size/100, test_size=test_size/100)
         
-        # Train the selected model using the training set
         if 'model' in request.form:
             model_name = request.form['model']
             if model_name == 'Random Forest':
@@ -81,20 +75,16 @@ def train_model():
         
         model.fit(X_train, y_train)
         
-        # Perform prediction on the test set
         y_pred = model.predict(X_test)
         
-        # Calculate accuracy
         accuracy = model.score(X_test, y_test)
         
-        # Save the trained model
         now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         model_name = f"{test_option}_random_forest_{now}.pkl"
         model_path = os.path.join(app.config['UPLOAD_FOLDER'], model_name)
         with open(model_path, 'wb') as file:
             pickle.dump(model, file)
         return render_template('percentage_split_result.html', accuracy=accuracy)
-        #return render_template('accuracy_comparison.html', models=[model_name])
     
     elif test_option == 'user_test_set':
         aroma = float(request.form['aroma'])
@@ -107,7 +97,6 @@ def train_model():
         clean_cup = float(request.form['clean_cup'])
         sweetness = float(request.form['sweetness'])
         
-        # Load and preprocess the dataset
         dataset_path = os.path.join(app.config['DATASET_FOLDER'], 'Coffee.csv')
         df = pd.read_csv(dataset_path)
         df = df.drop(['Overall', 'Defects', 'Category One Defects', 'Category Two Defects'], axis=1)
@@ -127,7 +116,6 @@ def train_model():
                 model.fit(X, y)
             else:
                 return "Invalid model selection"
-
         else:
             model_file = request.files['model_file']
             if not model_file:
@@ -137,25 +125,15 @@ def train_model():
         test_set1 = [[aroma],[flavor],[aftertaste],[acidity],[body],[balance],[uniformity],[clean_cup],[sweetness]]
         test_set = np.array(test_set1).reshape(1, -1)
         total_cup_point_pred = model.predict(test_set)
-
-        # Perform prediction on the test set
-        #total_cup_point_pred = model.predict(test_set)
-        
-        # Calculate accuracy
-        #accuracy = model.score(X_test, y_test)
-        
-        # Save the trained model
         now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         model_name = f"{test_option}_random_forest_{now}.pkl"
         model_path = os.path.join(app.config['UPLOAD_FOLDER'], model_name)
         with open(model_path, 'wb') as file:
             pickle.dump(model, file)
         return render_template('user_test_set_result.html', total_cup_point_pred=total_cup_point_pred)
-        #return render_template('accuracy_comparison.html')
     
     elif test_option == 'k_fold_cross_validation':
         k_fold = int(request.form['k_fold'])
-        # Load and preprocess the dataset
         dataset_path = os.path.join(app.config['DATASET_FOLDER'], 'Coffee.csv')
         df = pd.read_csv(dataset_path)
         df = df.drop(['Overall', 'Defects', 'Category One Defects', 'Category Two Defects'], axis=1)
@@ -163,7 +141,6 @@ def train_model():
         X = df.drop('Total Cup Points', axis=1)
         y = df['Total Cup Points']
         
-        # Train the selected model using the training set
         model_name = request.form['model']
         if model_name == 'Random Forest':
             model = RandomForestRegressor()
@@ -177,23 +154,18 @@ def train_model():
         scores = cross_val_score(model, X, y, cv=k_fold, scoring='neg_mean_squared_error')
         accuracy = scores
         
-        # Save the trained model
         now = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         model_name = f"{test_option}_random_forest_{now}.pkl"
         model_path = os.path.join(app.config['UPLOAD_FOLDER'], model_name)
         with open(model_path, 'wb') as file:
             pickle.dump(model, file)
         return render_template('k_fold_cross_validation_result.html', accuracy=accuracy)
-        #return render_template('accuracy_comparison.html')
 
 def predict_accuracy(X, y, models):
     accuracies = []
     
     for model in models:
-        # Perform prediction on the dataset
         y_pred = model.predict(X)
-        
-        # Calculate accuracy
         accuracy = model.score(X, y)
         accuracies.append(accuracy)
     
@@ -205,7 +177,6 @@ def show_compare_models():
 
 @app.route('/accuracy_comparison', methods=['POST'])
 def compare_models():
-    # Load and preprocess the dataset
     dataset_path = os.path.join(app.config['DATASET_FOLDER'], 'Coffee.csv')
     df = pd.read_csv(dataset_path)
     df = df.drop(['Overall', 'Defects', 'Category One Defects', 'Category Two Defects'], axis=1)
@@ -219,11 +190,9 @@ def compare_models():
     for file in selected_files:
         model = pickle.load(file)
         models.append(model)
-    
-    # Calculate accuracies
+        
     accuracies = predict_accuracy(X, y, models)
-    
-    # Create bar chart
+
     plt.bar(range(len(models)), accuracies)
     plt.xlabel('Models')
     plt.ylabel('Accuracy')
@@ -232,12 +201,6 @@ def compare_models():
     compare_img = os.path.join(app.config['COMPARE_FOLDER'], 'accuracy_comparison.png')
     modelcompare_img = Image.open(compare_img)
     return render_template('comparison_result.html', modelcompare_img=modelcompare_img)
-
-# @app.route('/compare_models_form')
-# def compare_models_form():
-#     model_files = glob.glob(os.path.join(app.config['UPLOAD_FOLDER'], 'Models', '*.pkl'))
-#     model_names = [os.path.basename(file) for file in model_files]
-#     return render_template('compare_models.html', models=model_names)
 
 @app.route('/exit', methods=['POST'])
 def exit_application():
