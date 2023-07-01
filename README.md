@@ -1,1 +1,2 @@
 # Coffee Quality Prediction Web Application deployed with Docker
+This project involves building a web application using Flask for regression analysis on a coffee dataset. It includes features like uploading datasets, selecting test options (percentage split, user test set, or k-fold cross-validation), training models (Random Forest, SVM, or KNN), evaluating model performance, comparing multiple models, and displaying the results through web templates.
